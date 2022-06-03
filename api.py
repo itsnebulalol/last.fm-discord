@@ -7,7 +7,6 @@ API_SECRET = "4f79bc1115694a8b123f56c88aef6be4"
 
 network = pylast.LastFMNetwork(api_key=API_KEY, api_secret=API_SECRET)
 
-
 class LastFmUser:
     def __init__(self, username, cooldown):
         self.username = username
@@ -28,6 +27,8 @@ class LastFmUser:
         except pylast.MalformedResponseError:
             print("Last.fm internal server error!, retrying connection")
             pass
+
+        print(current_track)
 
         if current_track is not None:
             track = current_track
