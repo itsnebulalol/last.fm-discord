@@ -28,8 +28,6 @@ class LastFmUser:
             print("Last.fm internal server error!, retrying connection")
             pass
 
-        print(self.user)
-
         if current_track is not None:
             track = current_track
             try:
@@ -44,7 +42,7 @@ class LastFmUser:
                 pass
             rpc.enable_rpc()
             rpc.update_status(str(track), str(album), time_remaining)
-            time.sleep(self.cooldown+8)
+            time.sleep(self.cooldown)
         else:
             print("No song detected, checking again in " +
                   str(self.cooldown)+" seconds")
