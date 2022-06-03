@@ -1,6 +1,6 @@
 import pylast
 import time
-import DiscordRPC as RPC
+import rpc
 
 API_KEY = "4a47d43987a47ead6689e15009d099b4"
 API_SECRET = "4f79bc1115694a8b123f56c88aef6be4"
@@ -20,8 +20,7 @@ class LastFmUser:
             current_track = self.user.get_now_playing()
             pass
         except pylast.WSError:
-            print("Connection problem at web serice, retrying connection in " +
-                  str(self.cooldown)+" seconds")
+            print("Connection problem, retrying connection in " + str(self.cooldown) + " seconds")
             pass
         except pylast.NetworkError:
             print("The app couldn't comunicate with last.fm servers, check your internet connection!")
@@ -42,11 +41,11 @@ class LastFmUser:
                 print(
                     "The app couldn't comunicate with last.fm servers, check your internet connection!")
                 pass
-            RPC.enable_RPC()
-            RPC.update_Status(str(track), str(album), time_remaining)
+            rpc.enable_rpc()
+            rpc.update_status(str(track), str(album), time_remaining)
             time.sleep(self.cooldown+8)
         else:
             print("No song detected, checking again in " +
                   str(self.cooldown)+" seconds")
-            RPC.disable_RPC()
+            rpc.disable_rpc()
         time.sleep(self.cooldown)
