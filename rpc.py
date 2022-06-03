@@ -64,11 +64,11 @@ def update_status(track, album, time_remaining):
                 presence.update(details=trackList[1], state=trackList[0],
                     large_image='icon', large_text='Last.fm')
 
-        printProgressBar(0, float(time_remaining) + start_time, prefix = 'Progress:', suffix = 'Complete', length = 50)
-        for i in range(1, float(time_remaining) + start_time + 1):
+        printProgressBar(0, int(time_remaining) + int(start_time), prefix = 'Progress:', suffix = 'Complete', length = 50)
+        for i in range(1, int(time_remaining) + int(start_time) + 1):
             time.sleep(1)
             # Update Progress Bar
-            printProgressBar(i + 1, float(time_remaining) + start_time, prefix = 'Progress:', suffix = 'Complete', length = 50)
+            printProgressBar(i + 1, int(time_remaining) + int(start_time), prefix = 'Progress:', suffix = 'Complete', length = 50)
 
 def disable_rpc():
     global already_enabled
