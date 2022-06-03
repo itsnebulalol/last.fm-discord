@@ -18,7 +18,7 @@ def enable_rpc():
         already_disabled = False
 
 
-def update_status(track, album, time_remaining):
+def update_status(track, album, time_remaining, url):
     global start_time, last_track
     if last_track == track:
         pass
@@ -30,18 +30,42 @@ def update_status(track, album, time_remaining):
         time_remaining = str(time_remaining)[0:3]
         if time_remaining != '0':
             if album != 'None':
-                presence.update(details=trackList[1], state=album, end=float(time_remaining) + start_time,
-                    large_image='icon', large_text='Last.fm')
+                if url != 'None':
+                    presence.update(details=trackList[1], state=album, end=float(time_remaining) + start_time,
+                        large_image='icon', large_text='Now Playing powered by last.fm', 
+                        buttons=[{"label": "Go to Song", "url": url}, {"label": "Nebula's Discord", "url": "https://discord.com/invite/XpYSa9NztA"}])
+                else:
+                    presence.update(details=trackList[1], state=album, end=float(time_remaining) + start_time,
+                        large_image='icon', large_text='Now Playing powered by last.fm', 
+                        buttons=[{"label": "Nebula's Discord", "url": "https://discord.com/invite/XpYSa9NztA"}])
             else:
-                presence.update(details=trackList[1], state=trackList[0], end=float(time_remaining) + start_time,
-                    large_image='icon', large_text='Last.fm')
+                if url != 'None':
+                    presence.update(details=trackList[1], state=trackList[0], end=float(time_remaining) + start_time,
+                        large_image='icon', large_text='Now Playing powered by last.fm', 
+                        buttons=[{"label": "Go to Song", "url": url}, {"label": "Nebula's Discord", "url": "https://discord.com/invite/XpYSa9NztA"}])
+                else:
+                    presence.update(details=trackList[1], state=trackList[0], end=float(time_remaining) + start_time,
+                        large_image='icon', large_text='Now Playing powered by last.fm', 
+                        buttons=[{"label": "Nebula's Discord", "url": "https://discord.com/invite/XpYSa9NztA"}])
         else:
             if album != 'None':
-                presence.update(details=trackList[1], state=album,
-                    large_image='icon', large_text='Last.fm')
+                if url != 'None':
+                    presence.update(details=trackList[1], state=album,
+                        large_image='icon', large_text='Now Playing powered by last.fm',
+                        buttons=[{"label": "Go to Song", "url": url}, {"label": "Nebula's Discord", "url": "https://discord.com/invite/XpYSa9NztA"}])
+                else:
+                    presence.update(details=trackList[1], state=album,
+                        large_image='icon', large_text='Now Playing powered by last.fm',
+                        buttons=[{"label": "Nebula's Discord", "url": "https://discord.com/invite/XpYSa9NztA"}])
             else:
-                presence.update(details=trackList[1], state=trackList[0],
-                    large_image='icon', large_text='Last.fm')
+                if url != 'None':
+                    presence.update(details=trackList[1], state=trackList[0],
+                        large_image='icon', large_text='Now Playing powered by last.fm',
+                        buttons=[{"label": "Go to Song", "url": url}, {"label": "Nebula's Discord", "url": "https://discord.com/invite/XpYSa9NztA"}])
+                else:
+                    presence.update(details=trackList[1], state=trackList[0],
+                        large_image='icon', large_text='Now Playing powered by last.fm',
+                        buttons=[{"label": "Nebula's Discord", "url": "https://discord.com/invite/XpYSa9NztA"}])
 
 def disable_rpc():
     global already_enabled

@@ -31,9 +31,10 @@ class LastFmUser:
         if current_track is not None:
             track = current_track
             try:
-                album,time_remaining = None, 0
+                album, time_remaining, url = None, 0, None
                 album = track.get_album()
                 time_remaining = track.get_duration()
+                url = track.get_url()
             except pylast.WSError:
                 pass
             except pylast.NetworkError:
@@ -41,7 +42,7 @@ class LastFmUser:
                     "The app couldn't comunicate with last.fm servers, check your internet connection!")
                 pass
             rpc.enable_rpc()
-            rpc.update_status(str(track), str(album), time_remaining)
+            rpc.update_status(str(track), str(album), time_remaining, str(url))
             time.sleep(self.cooldown)
         else:
             print("No song detected, checking again in " +
