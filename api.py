@@ -28,7 +28,7 @@ class LastFmUser:
             print("Last.fm internal server error!, retrying connection")
             pass
 
-        print(current_track)
+        print(self.user)
 
         if current_track is not None:
             track = current_track
